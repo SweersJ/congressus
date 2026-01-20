@@ -60,6 +60,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'int',
         'product_offer_id' => 'int',
+        'product_id' => 'int',
+        'folder_id' => 'int',
         'folder' => '\Compucie\Congressus\Model\ProductFolder',
         'name' => 'string',
         'description' => 'string',
@@ -85,6 +87,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'product_offer_id' => null,
+        'product_id' => null,
+        'folder_id' => null,
         'folder' => null,
         'name' => null,
         'description' => null,
@@ -108,6 +112,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'product_offer_id' => false,
+        'product_id' => false,
+        'folder_id' => false,
         'folder' => false,
         'name' => true,
         'description' => true,
@@ -211,6 +217,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'product_offer_id' => 'product_offer_id',
+        'product_id' => 'product_id',
+        'folder_id' => 'folder_id',
         'folder' => 'folder',
         'name' => 'name',
         'description' => 'description',
@@ -234,6 +242,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'product_offer_id' => 'setProductOfferId',
+        'product_id' => 'setProductId',
+        'folder_id' => 'setFolderId',
         'folder' => 'setFolder',
         'name' => 'setName',
         'description' => 'setDescription',
@@ -257,6 +267,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'product_offer_id' => 'getProductOfferId',
+        'product_id' => 'getProductId',
+        'folder_id' => 'getFolderId',
         'folder' => 'getFolder',
         'name' => 'getName',
         'description' => 'getDescription',
@@ -331,6 +343,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('product_offer_id', $data ?? [], null);
+        $this->setIfExists('product__id', $data ?? [], null);
+        $this->setIfExists('folder_id', $data ?? [], null);
         $this->setIfExists('folder', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
@@ -446,6 +460,60 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable product_offer_id cannot be null');
         }
         $this->container['product_offer_id'] = $product_offer_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_id
+     *
+     * @return int|null
+     */
+    public function getProductId()
+    {
+        return $this->container['product_id'];
+    }
+
+    /**
+     * Sets product_id
+     *
+     * @param int|null $product_id id for the product (variant)
+     *
+     * @return self
+     */
+    public function setProductId($product_id)
+    {
+        if (is_null($product_id)) {
+            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
+        }
+        $this->container['product_id'] = $product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets folder_id
+     *
+     * @return int|null
+     */
+    public function getFolderId()
+    {
+        return $this->container['folder_id'];
+    }
+
+    /**
+     * Sets folder_id
+     *
+     * @param int|null $folder_id id for the product folder
+     *
+     * @return self
+     */
+    public function setFolderId($folder_id)
+    {
+        if (is_null($folder_id)) {
+            throw new \InvalidArgumentException('non-nullable folder_id cannot be null');
+        }
+        $this->container['folder_id'] = $folder_id;
 
         return $this;
     }
