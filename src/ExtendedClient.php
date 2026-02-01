@@ -77,6 +77,39 @@ class ExtendedClient extends Client
         return $returnMembers;
     }
 
+    /**
+     * @param array<string> $categories
+     * @return array<Model\Product>
+     */
+    public function searchProducts(array $categories, string $name, int $count = null): array
+    {
+        $productFolders = $this->retrieveProductFoldersBySlug(...$categories);
+        $products = [];
+
+        foreach ($productFolders as $productFolder) {
+            $folderId = $productFolder->getId();
+            if (!$folderId) {
+                continue;
+            }
+            $folderProducts = $this->listProducts(
+                limit: null,
+                folder_id: $folderId,
+                order: 'name'
+            );
+
+            foreach ($folderProducts as $product) {
+                if (stripos($product->getName(), $name) !== false) {
+                    $products[] = $product;
+
+                    if ($count !== null && count($products) >= $count) {
+                        return $products;
+                    }
+                }
+            }
+        }
+        return $products;
+    }
+
 
     /***************************************************************
      * EVENTS
