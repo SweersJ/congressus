@@ -139,7 +139,7 @@ class ExtendedClient extends Client
         $events = $this->listEvents(
             $limit,
             period_filter: self::formatPeriod(time()),
-            published: true,
+            published: "published",
             order: "start:asc",
         );
         return array_slice($events, 0, $limit);
