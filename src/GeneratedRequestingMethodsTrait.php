@@ -846,13 +846,13 @@ trait GeneratedRequestingMethodsTrait
      * @return  Model\Event[]
      * @generated
      */
-    public function listEvents(?int $limit, int $category_id = null, string $period_filter = null, string $published = null, array $participation_billing_enabled = null, int $participating_member_id = null, int $socie_app_id = null, int $member_id = null, string $order = null): array
+    public function listEvents(?int $limit, int $category_id = null, string $period_filter = null, string $status = null, string $published = null, array $participation_billing_enabled = null, int $participating_member_id = null, int $socie_app_id = null, int $member_id = null, string $order = null): array
     {
         $pageNumber = 1;
         $page = null;
         $result = array();
         while (self::isRequestingAllowed($page, $limit)) {
-            $page = $this->listEventsPaginated($category_id, $period_filter, $published, $participation_billing_enabled, $participating_member_id, $socie_app_id, $member_id, $order, page: $pageNumber);
+            $page = $this->listEventsPaginated($category_id, $period_filter, $status, $published, $participation_billing_enabled, $participating_member_id, $socie_app_id, $member_id, $order, page: $pageNumber);
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
@@ -862,11 +862,11 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listEventsPaginated(int $category_id = null, string $period_filter = null, string $published = null, array $participation_billing_enabled = null, int $participating_member_id = null, int $socie_app_id = null, int $member_id = null, string $order = null, int $page = null, int $page_size = null): Model\EventPagination
+    public function listEventsPaginated(int $category_id = null, string $period_filter = null, string $status = null, string $published = null, array $participation_billing_enabled = null, int $participating_member_id = null, int $socie_app_id = null, int $member_id = null, string $order = null, int $page = null, int $page_size = null): Model\EventPagination
     {
         $request = new Request("GET", "/v30/events", get_defined_vars());
         $request->enablePathParameters();
-        $request->enableQueryParameters("category_id", "period_filter", "published", "participation_billing_enabled", "participating_member_id", "socie_app_id", "member_id", "page", "page_size", "order");
+        $request->enableQueryParameters("category_id", "period_filter", "status", "published", "participation_billing_enabled", "participating_member_id", "socie_app_id", "member_id", "page", "page_size", "order");
         $request->enableBodyFields();
         return $this->submit($request, Model\EventPagination::class);
     }
